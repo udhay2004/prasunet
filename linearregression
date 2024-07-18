@@ -1,0 +1,24 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+data = {
+    'SquareFootage': [1500, 1800, 2400, 3000, 3500],
+    'Bedrooms': [3, 4, 3, 5, 4],
+    'Bathrooms': [2, 3, 2, 4, 3],
+    'Price': [300000, 400000, 350000, 500000, 450000]
+}
+
+df = pd.DataFrame(data)
+
+X = df[['SquareFootage', 'Bedrooms', 'Bathrooms']]
+y = df['Price']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+print(f"Predictions: {y_pred}")
